@@ -1,0 +1,113 @@
+ #dealer-lots {
+    font-family: Oswald, sans-serif;
+    text-align: center;
+    width: 100%;
+}
+#inventory-list {
+    display: grid;
+    grid-row-gap: 2rem;
+    grid-column-gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    list-style: none;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1080px;
+    padding: 0;
+}
+#inventory-list li {
+    background-color: #fff;
+    border: solid 1px #aaa;
+    text-align: center;
+    opacity: .25;
+}
+#inventory-list li.dontclick:after {
+    content: "Please, enter the delivery zip code above to find the correct lot. Thanks!";
+    color: #7c332a;
+    font-size: .8em;
+    font-weight: bold;
+    line-height: 1.1em;
+    padding: 3px 12px;
+}
+#inventory-list .active {
+    opacity: 1;
+}
+#inventory-list .hidden {
+    display: none;
+}
+#inventory-list li h1 {
+    background-color: #A0A98C;
+    color: #333;
+    font-family: Oswald, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 0 !important;
+    padding: 2em 0;
+}
+#inventory-list li a.inventoryLink {
+    background-color: #7C332A;
+    color: #fff;
+    display: block;
+    font-family: Oswald, sans-serif;
+    font-size: .9rem;
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    padding: 3px 12px;
+    text-decoration: none;
+    width: 70%;
+}
+#inventory-list .imgBox {
+    display: none;
+}
+#inventory-list .active .imgBox {
+    display: block;
+}
+#inventory-list p {
+    font-size: .8em;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+#zipform {
+    margin-bottom: 24px;
+    text-align: center;
+}
+#zipform .formSection {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#zipform .formField {
+    flex-basis: 100%;
+}
+#working-icon {
+    display: none;
+    width: 24px;
+    height: 24px;
+}
+#working-icon.show-working {
+    display: inline-block;
+}
+
+@media (max-width: 1080px) {
+    #inventory-list {
+        grid-row-gap: 1rem;
+        grid-column-gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+        margin-left: 9px;
+        margin-right: 9px;
+    }
+    #inventory-list li h1 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+	#inventory-list {
+        grid-template-columns: 100%;
+    }
+    #inventory-list li a.inventoryLink {
+        width: 90%;
+    }
+}
