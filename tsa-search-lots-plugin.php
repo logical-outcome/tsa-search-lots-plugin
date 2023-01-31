@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: TSA Search Lots Plugin
- * Description: This was made exclusively for Montana Shed Center. The plugin will list the lot by a given zip code.
+ * Description: This was made for The Shed App. The plugin will list the lot by a given zip code.
  * Requires at least: 5.8
  * Requires PHP:      7.0
  * Version:           2.5.1
