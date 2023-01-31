@@ -23,7 +23,7 @@ Updates:
 2.5.1 Corrected instructions.
 */
 
-class MSC_Lot_Search {
+class TSA_Lot_Search {
 
     function __construct() {
         add_action( 'admin_menu', array($this, 'adminPage'));
@@ -32,31 +32,31 @@ class MSC_Lot_Search {
     }
 
     function adminPage() {
-        add_options_page( 'Set Details Search', 'MSC Lots', 'manage_options', 'msc-lot-search-plugin', array($this, 'showSettingsPage') ); 
+        add_options_page( 'Set Details Search', 'TSA Lots', 'manage_options', 'tsa-lot-search-plugin', array($this, 'showSettingsPage') ); 
     }
 
     function settings() {
 
-        add_settings_section( 'mscls_lot_section', 'Lot Information', array($this,'mscls_lot_section_text'), 'msc-lot-search-plugin' );
+        add_settings_section( 'tsals_lot_section', 'Lot Information', array($this,'tsals_lot_section_text'), 'tsa-lot-search-plugin' );
 
         // creates a field for the TSA URL
-        add_settings_field( 'tsaURL', 'Enter your URL for The Shed App', array($this, 'tsaHTML'), 'msc-lot-search-plugin', 'mscls_lot_section' );
-        register_setting( 'msc_lot_search_plugin', 'tsaURL', array('sanitize_callback' => 'sanitize_text_field', 'default' => 0) );
+        add_settings_field( 'tsaURL', 'Enter your URL for The Shed App', array($this, 'tsaHTML'), 'tsa-lot-search-plugin', 'tsals_lot_section' );
+        register_setting( 'tsa_lot_search_plugin', 'tsaURL', array('sanitize_callback' => 'sanitize_text_field', 'default' => 0) );
 
         // creates a field for the API key
-        add_settings_field( 'zipcodeAPI', 'Zip Code API. (https://www.zipcodeapi.com)', array($this, 'settingAPIHTML'), 'msc-lot-search-plugin', 'mscls_lot_section' );
-        register_setting( 'msc_lot_search_plugin', 'zipcodeAPI', array('sanitize_callback' => 'sanitize_text_field', 'default' => 0) );
+        add_settings_field( 'zipcodeAPI', 'Zip Code API. (https://www.zipcodeapi.com)', array($this, 'settingAPIHTML'), 'tsa-lot-search-plugin', 'tsals_lot_section' );
+        register_setting( 'tsa_lot_search_plugin', 'zipcodeAPI', array('sanitize_callback' => 'sanitize_text_field', 'default' => 0) );
        
         // creates a field for the lot zip code
-        add_settings_field( 'zipRadius', 'Radius from Zip (in miles)', array($this, 'zipRadiusHTML'), 'msc-lot-search-plugin', 'mscls_lot_section' );
-        register_setting( 'msc_lot_search_plugin', 'zipRadius', array('sanitize_callback' => 'sanitize_text_field', 'default' => 0) );
+        add_settings_field( 'zipRadius', 'Radius from Zip (in miles)', array($this, 'zipRadiusHTML'), 'tsa-lot-search-plugin', 'tsals_lot_section' );
+        register_setting( 'tsa_lot_search_plugin', 'zipRadius', array('sanitize_callback' => 'sanitize_text_field', 'default' => 0) );
 
         //creates a field for the store id
-        add_settings_field( 'lotInfo', 'Please enter lots like (Zip Code, City, and Store ID. on a new line for each lot). You can use a spreadsheet to create this and save it as a CSV file, but make sure to use semicolons as the separator. Copy the contents of the CSV file and paste it here.', array($this, 'lotHTML'), 'msc-lot-search-plugin', 'mscls_lot_section' );
-        register_setting( 'msc_lot_search_plugin', 'lotInfo', array('sanitize_callback' => array($this,'verifyInput'), 'default' => 0) );
+        add_settings_field( 'lotInfo', 'Please enter lots like (Zip Code, City, and Store ID. on a new line for each lot). You can use a spreadsheet to create this and save it as a CSV file, but make sure to use semicolons as the separator. Copy the contents of the CSV file and paste it here.', array($this, 'lotHTML'), 'tsa-lot-search-plugin', 'tsals_lot_section' );
+        register_setting( 'tsa_lot_search_plugin', 'lotInfo', array('sanitize_callback' => array($this,'verifyInput'), 'default' => 0) );
     }
 
-    function mscls_lot_section_text() { ?>
+    function tsals_lot_section_text() { ?>
 <p>Please create the lots</p>
 <?php }
 
@@ -104,8 +104,8 @@ function zipRadiusHTML(){ ?>
     <h1>Lot Search (Please use short code [Search_Lots])</h1>
     <form action="options.php" method="POST">
         <?php 
-                settings_fields( 'msc_lot_search_plugin' );
-                do_settings_sections( 'msc-lot-search-plugin' );
+                settings_fields( 'tsa_lot_search_plugin' );
+                do_settings_sections( 'tsa-lot-search-plugin' );
                 submit_button( );
             ?>
     </form>
@@ -118,9 +118,9 @@ function zipRadiusHTML(){ ?>
     }
     function enqueue_scripts() {
 
-        wp_enqueue_script( 'msc-search-lots-plugin', plugin_dir_url( __FILE__ ).'msc-search-lots-plugin.min.js', array('jquery'), 2.3, true);
+        wp_enqueue_script( 'tsa-search-lots-plugin', plugin_dir_url( __FILE__ ).'tsa-search-lots-plugin.min.js', array('jquery'), 2.3, true);
 
-        wp_enqueue_style( 'msc-search-lots-plugin', plugin_dir_url( __FILE__ ).'msc-search-lots-plugin.min.css', false , 2.3, 'all' );
+        wp_enqueue_style( 'tsa-search-lots-plugin', plugin_dir_url( __FILE__ ).'tsa-search-lots-plugin.min.css', false , 2.3, 'all' );
     }
 
     function doShortCode() {
@@ -178,4 +178,4 @@ return $formHTML.'<ul id="inventory-list">'.$lotHTML.'</ul>'.$this->page_content
 
 }
 
-$mscsearch = new MSC_Lot_Search();
+$tsasearch = new TSA_Lot_Search();
